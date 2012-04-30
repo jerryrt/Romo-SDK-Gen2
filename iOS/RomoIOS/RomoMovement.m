@@ -60,6 +60,7 @@
 {
     [self overrideToHeadphones:YES];
     [[NativeManager shared] playMotorCommandLeft:leftValue commandRight:rightValue];
+    NSLog(@"moved left:%i and right:%i",leftValue,rightValue);
 }
 
 - (void)moveAuxMotors:(uint8_t)auxValue
@@ -378,7 +379,6 @@
     }
 }
 
-
 /****************************************
  Move Queues
  ****************************************/
@@ -390,10 +390,7 @@
         isRunning = NO;
         [self stopMotors:RMOutputDrive];
     }
-    if ([_moveTimer isValid]) {
-        [_moveTimer invalidate];
-    }
-    
+
     _moveTimer = nil;
     
     currentMoveStep = 0;
@@ -413,7 +410,7 @@
     }
     
     _moveTimer = nil;
-    [_moveTimer release];
+    
 }
 
 - (void)moveQueueCallback:(NSTimer *)timer

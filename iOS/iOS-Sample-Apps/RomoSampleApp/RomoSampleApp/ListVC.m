@@ -9,7 +9,9 @@
 #import "ListVC.h"
 
 @interface ListVC ()
+
 - (NSString *)stringForAuxValue:(int)auxValue;
+- (BOOL)isIOS5;
 @end
 
 @implementation ListVC
@@ -35,24 +37,24 @@
     if (moveQueue.count == 0) {
         return;
     }
-    if(romo.isRunning) {
-        [romo stopAllMotors];
-    }
-    
-    if (![romo isInQueue]) {
+
+    if (!isInQueue) {
+
         [romo setMoveQueue:[NSArray arrayWithArray:moveQueue]];
         [romo startMoveQueue];
         [btnRun setTitle:@"Stop"];
-        //Here's a present for you, I'm disabling the Run button until the weird timing bug is fixed
-        //TODO: fix timing bug in MoveQueues
-        [btnRun setEnabled:NO];
+        
+        if([self isIOS5]) {
+            [btnRun setTintColor:[UIColor redColor]];
+        }
+        isInQueue = YES;
         
     } else {
         [romo stopMoveQueue];
-        [btnRun setTitle:@"Run"];
-    }
-}
 
+        isInQueue = NO;
+    }
+}                      
 
 /*****************************
  CmdOptions Delegate
@@ -72,12 +74,17 @@
 
 - (void)didBeginMoveQueueStep:(NSInteger)stepNumber
 {
+    
     [tblCommands selectRowAtIndexPath:[NSIndexPath indexPathForRow:stepNumber inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
 }
 - (void)didFinishMoveQueue:(NSInteger)completedSteps inMoveQueue:(NSArray *)moveQueue
 {
+    [romo stopAllMotors];
+    if([self isIOS5]) {
+        [btnRun setTintColor:[UIColor colorWithRed:91.0f/255.0f green:174.0f/255.0f blue:254.0f/255.0f alpha:1.0]];
+    }
     [btnRun setTitle:@"Run"];
-    [btnRun setEnabled:YES];
+    isInQueue = NO;
     
 }
 - (void)didFinishMoveQueueStep:(NSInteger) stepNumber
@@ -167,8 +174,6 @@
     return 1;
 }
 
-
-
 /*****************************
  View Events
  *****************************/
@@ -202,14 +207,23 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [romo moveLeftMotor:128 andRight:128];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait || interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
 }
 
 /*****************************
- View Events
+ Helper functions
  *****************************/
+- (BOOL)isIOS5
+{
+    return ([[[UIDevice currentDevice] systemVersion] floatValue] >= 5.0);
+}
 
 - (NSString *)stringForAuxValue:(int)auxValue
 {

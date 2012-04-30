@@ -17,6 +17,7 @@
     CmdOptionsVC *cmdOptionsVC;
     RomoMovement *romo;
     NSMutableArray *moveQueue;
+    BOOL isInQueue;
 }
 @property (nonatomic, retain) IBOutlet UITableView *tblCommands;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *btnRun;
