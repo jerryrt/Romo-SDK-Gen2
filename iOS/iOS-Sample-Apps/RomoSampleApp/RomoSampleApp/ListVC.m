@@ -15,7 +15,7 @@
 @end
 
 @implementation ListVC
-@synthesize tblCommands, btnRun;
+@synthesize tblCommands, btnRun, btnEdit;
 
 /*****************************
  Button Events
@@ -24,12 +24,8 @@
 - (IBAction)btnAddTap:(id)sender
 {
     //Present Modal Dialog for the Cmd Options
-    
-    if (cmdOptionsVC == nil) {
-        cmdOptionsVC = [[CmdOptionsVC alloc] init];
-        cmdOptionsVC.delegate = self;
-    }
     [self presentModalViewController:cmdOptionsVC animated:YES];
+    [cmdOptionsVC loadNewOptions];
 
 }
 - (IBAction)btnRunTap:(id)sender
@@ -54,15 +50,33 @@
 
         isInQueue = NO;
     }
-}                      
-
+}   
+- (IBAction)btnEditTap:(id)sender
+{
+    if(tblCommands.editing) {
+        [tblCommands setEditing:NO animated:YES];
+        [tblCommands reloadData];
+        [btnEdit setTitle:@"Edit"];
+		[btnEdit setStyle:UIBarButtonItemStyleBordered];
+        [btnRun setEnabled:YES];  
+    } else {
+        [tblCommands setEditing:YES animated:YES];
+		[tblCommands reloadData];
+		[btnEdit setTitle:@"Done"];
+		[btnEdit setStyle:UIBarButtonItemStyleDone];
+        [btnRun setEnabled:NO];  
+    }
+}
 /*****************************
  CmdOptions Delegate
  *****************************/
-- (void)didSaveWithOptions:(NSDictionary *)options
+- (void)didSaveWithOptions:(NSDictionary *)options forIndex:(NSInteger)index
 {
-    if (options) {
+    if (index < 0) {
         [moveQueue addObject:options];
+    } else {
+        [moveQueue removeObjectAtIndex:index];
+        [moveQueue insertObject:options atIndex:index];
     }
     
     [tblCommands reloadData];
@@ -122,18 +136,48 @@
     
 }
 
+-(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+    //Open up cmdOptions
+    [self presentModalViewController:cmdOptionsVC animated:YES];
+    [cmdOptionsVC loadExistingOptions:[moveQueue objectAtIndex:indexPath.row] atIndex:indexPath.row];
+}
+
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return YES if you want the specified item to be editable.
     return YES;
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(!tblCommands.editing || !indexPath) return UITableViewCellEditingStyleNone;
+    return UITableViewCellEditingStyleDelete;
+}
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath 
+{
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         [moveQueue removeObjectAtIndex:indexPath.row];
         [tblCommands reloadData];
         
     }    
+}
+//Can reorder items
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    NSDictionary * item = [moveQueue objectAtIndex:sourceIndexPath.row];
+    [moveQueue removeObjectAtIndex:sourceIndexPath.row];
+    
+    if(destinationIndexPath.row < [moveQueue count]) {
+        [moveQueue insertObject:item atIndex:destinationIndexPath.row];
+    } else {
+        [moveQueue insertObject:item atIndex:[moveQueue count]];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -143,7 +187,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) 
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
     if ([[[moveQueue objectAtIndex:indexPath.row] objectForKey:@"mode"] intValue] == 0) {
@@ -159,8 +203,10 @@
     }
     
     
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"Time:%.1f s",
+    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.1fs",
                                  [[[moveQueue objectAtIndex:indexPath.row] objectForKey:@"time"] floatValue]];
+    cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+    
     return cell;
 }
 
@@ -194,10 +240,14 @@
     romo = [[RomoMovement alloc] init];
     
     [romo setDelegate:self];
-    [cmdOptionsVC setDelegate:self];
     
     //Load moveQueue
     moveQueue = [[NSMutableArray alloc] init];
+    
+    if (cmdOptionsVC == nil) {
+        cmdOptionsVC = [[CmdOptionsVC alloc] init];
+        cmdOptionsVC.delegate = self;
+    }
 }
 
 - (void)viewDidUnload
@@ -209,7 +259,7 @@
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [romo moveLeftMotor:128 andRight:128];
+    //[romo moveLeftMotor:128 andRight:128];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

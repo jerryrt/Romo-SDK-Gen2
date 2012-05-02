@@ -12,6 +12,7 @@
 @interface CmdOptionsVC ()
 {
     NSInteger commandMode;
+    NSInteger editIndex;
 }
 @end
 
@@ -51,7 +52,8 @@
                    [NSNumber numberWithInt:aux3Slider.value], @"aux3", nil];
     }
     
-    [delegate didSaveWithOptions:cmdInfo];
+    [delegate didSaveWithOptions:cmdInfo forIndex:editIndex];
+    
     [self dismissModalViewControllerAnimated:YES];
 }
 - (IBAction)btnCancelTap:(id)sender
@@ -66,7 +68,7 @@
 - (IBAction)durationSliderChanged:(id)sender
 {
     //Update label
-    lblDuration.text = [NSString stringWithFormat:@"Time Duration: %.1f",(durationSlider.value/10)];
+    lblDuration.text = [NSString stringWithFormat:@"Time Duration: %.1fs",(durationSlider.value/10)];
 }
 - (IBAction)driveMotorSlidersChanged:(UISlider *)sender
 {
@@ -82,12 +84,15 @@
 {
     NSString *readableCommand;
     
-    if (sender.value == 0) {
+    if (sender.value <= 0.5) {
         readableCommand = @"Back";
-    } else if (sender.value == 1) {
+        sender.value = 0;
+    } else if (sender.value > 0.5 && sender.value <= 1.5) {
         readableCommand = @"Stop";
+        sender.value = 1;
     } else {
         readableCommand = @"Forward";
+        sender.value = 2;
     }
     
     switch (sender.tag) {
@@ -122,6 +127,83 @@
     }
 }
 
+/**
+ * Load Existing Options
+ */
+
+- (void)loadExistingOptions:(NSDictionary *)options atIndex:(NSInteger)index
+{
+    editIndex = index;
+    
+    if ([[options objectForKey:@"mode"] intValue] == 0) {
+        //Drive panel
+        [outputSegCntrl setSelectedSegmentIndex:0];
+        commandMode = 0;
+        driveView.hidden = NO;
+        auxView.hidden = YES;
+        
+        UISlider *leftSlider = [driveSliders objectAtIndex:0];
+        UISlider *rightSlider = [driveSliders objectAtIndex:1];
+        
+        leftSlider.value = [[options objectForKey:@"left"] intValue];
+        rightSlider.value = [[options objectForKey:@"right"] intValue];
+        
+        [self driveMotorSlidersChanged:leftSlider];
+        [self driveMotorSlidersChanged:rightSlider];
+        
+        
+    } else {
+        
+        //Aux panel
+        [outputSegCntrl setSelectedSegmentIndex:1];
+        commandMode = 1;
+        driveView.hidden = YES;
+        auxView.hidden = NO;
+        
+        UISlider *aux1Slider = [auxSliders objectAtIndex:0];
+        UISlider *aux2Slider = [auxSliders objectAtIndex:1];
+        UISlider *aux3Slider = [auxSliders objectAtIndex:2];
+        
+        aux1Slider.value = [[options objectForKey:@"aux1"] intValue];
+        aux2Slider.value = [[options objectForKey:@"aux2"] intValue];
+        aux3Slider.value = [[options objectForKey:@"aux3"] intValue];
+        
+        [self auxSlidersChanged:aux1Slider];
+        [self auxSlidersChanged:aux2Slider];
+        [self auxSlidersChanged:aux3Slider];
+
+    }
+    
+    
+    durationSlider.value = 10 * [[options objectForKey:@"time"] floatValue];
+    [self durationSliderChanged:durationSlider];
+    
+}
+
+- (void)loadNewOptions
+{
+    editIndex = -1;
+    [outputSegCntrl setSelectedSegmentIndex:0];
+    commandMode = 0;
+    driveView.hidden = NO;
+    auxView.hidden = YES;
+    
+    //reset all uisliders to original
+    for (UISlider *slider in auxSliders) {
+        slider.value = 1;
+        [self auxSlidersChanged:slider];
+    }
+    
+    //reset all uisliders to original
+    for (UISlider *slider in driveSliders) {
+        slider.value = 128;
+        [self driveMotorSlidersChanged:slider];
+    }
+
+}
+
+
+
 /*****************************
  View Events
  *****************************/
@@ -139,32 +221,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
-    [outputSegCntrl setSelectedSegmentIndex:0];
-    commandMode = 0;
-    driveView.hidden = NO;
-    
-    auxView.hidden = YES;
-    auxView.frame = CGRectMake(0, 128, 320, 216);
     [self.view addSubview:auxView];
+    auxView.frame = CGRectMake(0, 128, 320, 216);
     
     
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    //reset all uisliders to original
-    for (UISlider *slider in auxSliders) {
-        slider.value = 1;
-        [self auxSlidersChanged:slider];
-    }
     
     
-    //reset all uisliders to original
-    for (UISlider *slider in driveSliders) {
-        slider.value = 128;
-        [self driveMotorSlidersChanged:slider];
-    }
 }
 
 - (void)viewDidUnload

@@ -21,9 +21,10 @@
 }
 @property (nonatomic, retain) IBOutlet UITableView *tblCommands;
 @property (nonatomic, retain) IBOutlet UIBarButtonItem *btnRun;
+@property (nonatomic, retain) IBOutlet UIBarButtonItem *btnEdit;
 
 - (IBAction)btnAddTap:(id)sender;
 - (IBAction)btnRunTap:(id)sender;
-
+- (IBAction)btnEditTap:(id)sender;
 
 @end
