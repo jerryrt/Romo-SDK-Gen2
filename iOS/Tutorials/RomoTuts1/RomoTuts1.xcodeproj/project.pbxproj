@@ -1,0 +1,392 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BF744DF8154FA3B300B51FDB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744DF7154FA3B300B51FDB /* UIKit.framework */; };
+		BF744DFA154FA3B300B51FDB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744DF9154FA3B300B51FDB /* Foundation.framework */; };
+		BF744DFC154FA3B300B51FDB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744DFB154FA3B300B51FDB /* CoreGraphics.framework */; };
+		BF744E02154FA3B300B51FDB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF744E00154FA3B300B51FDB /* InfoPlist.strings */; };
+		BF744E04154FA3B300B51FDB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF744E03154FA3B300B51FDB /* main.m */; };
+		BF744E08154FA3B300B51FDB /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF744E07154FA3B300B51FDB /* AppDelegate.m */; };
+		BF744E0B154FA3B300B51FDB /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF744E0A154FA3B300B51FDB /* ViewController.m */; };
+		BF744E0E154FA3B300B51FDB /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF744E0C154FA3B300B51FDB /* ViewController.xib */; };
+		BF744E2A154FA3DC00B51FDB /* RomoMovement.m in Sources */ = {isa = PBXBuildFile; fileRef = BF744E16154FA3DC00B51FDB /* RomoMovement.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E2B154FA3DC00B51FDB /* AudioInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF744E18154FA3DC00B51FDB /* AudioInterface.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E2C154FA3DC00B51FDB /* AudioInterfaceOpenAL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF744E1A154FA3DC00B51FDB /* AudioInterfaceOpenAL.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E2D154FA3DC00B51FDB /* AudioManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF744E1C154FA3DC00B51FDB /* AudioManager.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E2E154FA3DC00B51FDB /* AudioThread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF744E1E154FA3DC00B51FDB /* AudioThread.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E2F154FA3DC00B51FDB /* NativeManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = BF744E22154FA3DC00B51FDB /* NativeManager.mm */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E30154FA3DC00B51FDB /* ResourceManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF744E23154FA3DC00B51FDB /* ResourceManager.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E31154FA3DC00B51FDB /* Thread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF744E26154FA3DC00B51FDB /* Thread.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E32154FA3DC00B51FDB /* WavFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = BF744E28154FA3DC00B51FDB /* WavFile.cpp */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		BF744E35154FA40500B51FDB /* romo-normal.png in Resources */ = {isa = PBXBuildFile; fileRef = BF744E34154FA40500B51FDB /* romo-normal.png */; };
+		BF744EB3154FCDA500B51FDB /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744EB2154FCDA500B51FDB /* MediaPlayer.framework */; };
+		BF744EB5154FCDAC00B51FDB /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744EB4154FCDAC00B51FDB /* AudioToolbox.framework */; };
+		BF744EB7154FCDB400B51FDB /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744EB6154FCDB400B51FDB /* AVFoundation.framework */; };
+		BF744EB9154FCDBB00B51FDB /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744EB8154FCDBB00B51FDB /* OpenAL.framework */; };
+		BF744EBB154FCDE600B51FDB /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF744EBA154FCDE600B51FDB /* CoreMotion.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		BF744DF3154FA3B300B51FDB /* RomoTuts1.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RomoTuts1.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BF744DF7154FA3B300B51FDB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		BF744DF9154FA3B300B51FDB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BF744DFB154FA3B300B51FDB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		BF744DFF154FA3B300B51FDB /* RomoTuts1-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RomoTuts1-Info.plist"; sourceTree = "<group>"; };
+		BF744E01154FA3B300B51FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		BF744E03154FA3B300B51FDB /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BF744E05154FA3B300B51FDB /* RomoTuts1-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RomoTuts1-Prefix.pch"; sourceTree = "<group>"; };
+		BF744E06154FA3B300B51FDB /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		BF744E07154FA3B300B51FDB /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		BF744E09154FA3B300B51FDB /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		BF744E0A154FA3B300B51FDB /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BF744E0D154FA3B300B51FDB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+		BF744E15154FA3DC00B51FDB /* RomoMovement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomoMovement.h; sourceTree = "<group>"; };
+		BF744E16154FA3DC00B51FDB /* RomoMovement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RomoMovement.m; sourceTree = "<group>"; };
+		BF744E18154FA3DC00B51FDB /* AudioInterface.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioInterface.cpp; sourceTree = "<group>"; };
+		BF744E19154FA3DC00B51FDB /* AudioInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInterface.h; sourceTree = "<group>"; };
+		BF744E1A154FA3DC00B51FDB /* AudioInterfaceOpenAL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioInterfaceOpenAL.cpp; sourceTree = "<group>"; };
+		BF744E1B154FA3DC00B51FDB /* AudioInterfaceOpenAL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioInterfaceOpenAL.h; sourceTree = "<group>"; };
+		BF744E1C154FA3DC00B51FDB /* AudioManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioManager.cpp; sourceTree = "<group>"; };
+		BF744E1D154FA3DC00B51FDB /* AudioManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioManager.h; sourceTree = "<group>"; };
+		BF744E1E154FA3DC00B51FDB /* AudioThread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AudioThread.cpp; sourceTree = "<group>"; };
+		BF744E1F154FA3DC00B51FDB /* AudioThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioThread.h; sourceTree = "<group>"; };
+		BF744E20154FA3DC00B51FDB /* NativeInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeInterface.h; sourceTree = "<group>"; };
+		BF744E21154FA3DC00B51FDB /* NativeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeManager.h; sourceTree = "<group>"; };
+		BF744E22154FA3DC00B51FDB /* NativeManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = NativeManager.mm; sourceTree = "<group>"; };
+		BF744E23154FA3DC00B51FDB /* ResourceManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ResourceManager.cpp; sourceTree = "<group>"; };
+		BF744E24154FA3DC00B51FDB /* ResourceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceManager.h; sourceTree = "<group>"; };
+		BF744E25154FA3DC00B51FDB /* RomoInclude.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RomoInclude.h; sourceTree = "<group>"; };
+		BF744E26154FA3DC00B51FDB /* Thread.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Thread.cpp; sourceTree = "<group>"; };
+		BF744E27154FA3DC00B51FDB /* Thread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Thread.h; sourceTree = "<group>"; };
+		BF744E28154FA3DC00B51FDB /* WavFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = WavFile.cpp; sourceTree = "<group>"; };
+		BF744E29154FA3DC00B51FDB /* WavFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WavFile.h; sourceTree = "<group>"; };
+		BF744E34154FA40500B51FDB /* romo-normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "romo-normal.png"; sourceTree = "<group>"; };
+		BF744EB2154FCDA500B51FDB /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		BF744EB4154FCDAC00B51FDB /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		BF744EB6154FCDB400B51FDB /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		BF744EB8154FCDBB00B51FDB /* OpenAL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenAL.framework; path = System/Library/Frameworks/OpenAL.framework; sourceTree = SDKROOT; };
+		BF744EBA154FCDE600B51FDB /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BF744DF0154FA3B300B51FDB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF744EBB154FCDE600B51FDB /* CoreMotion.framework in Frameworks */,
+				BF744EB9154FCDBB00B51FDB /* OpenAL.framework in Frameworks */,
+				BF744EB7154FCDB400B51FDB /* AVFoundation.framework in Frameworks */,
+				BF744EB5154FCDAC00B51FDB /* AudioToolbox.framework in Frameworks */,
+				BF744EB3154FCDA500B51FDB /* MediaPlayer.framework in Frameworks */,
+				BF744DF8154FA3B300B51FDB /* UIKit.framework in Frameworks */,
+				BF744DFA154FA3B300B51FDB /* Foundation.framework in Frameworks */,
+				BF744DFC154FA3B300B51FDB /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BF744DE8154FA3B300B51FDB = {
+			isa = PBXGroup;
+			children = (
+				BF744DFD154FA3B300B51FDB /* RomoTuts1 */,
+				BF744DF6154FA3B300B51FDB /* Frameworks */,
+				BF744DF4154FA3B300B51FDB /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BF744DF4154FA3B300B51FDB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF744DF3154FA3B300B51FDB /* RomoTuts1.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF744DF6154FA3B300B51FDB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF744EBA154FCDE600B51FDB /* CoreMotion.framework */,
+				BF744EB8154FCDBB00B51FDB /* OpenAL.framework */,
+				BF744EB6154FCDB400B51FDB /* AVFoundation.framework */,
+				BF744EB4154FCDAC00B51FDB /* AudioToolbox.framework */,
+				BF744EB2154FCDA500B51FDB /* MediaPlayer.framework */,
+				BF744DF7154FA3B300B51FDB /* UIKit.framework */,
+				BF744DF9154FA3B300B51FDB /* Foundation.framework */,
+				BF744DFB154FA3B300B51FDB /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF744DFD154FA3B300B51FDB /* RomoTuts1 */ = {
+			isa = PBXGroup;
+			children = (
+				BF744E33154FA40500B51FDB /* RomoFaces */,
+				BF744E14154FA3DC00B51FDB /* RomoIOS */,
+				BF744E17154FA3DC00B51FDB /* RomoLibrary */,
+				BF744E06154FA3B300B51FDB /* AppDelegate.h */,
+				BF744E07154FA3B300B51FDB /* AppDelegate.m */,
+				BF744E09154FA3B300B51FDB /* ViewController.h */,
+				BF744E0A154FA3B300B51FDB /* ViewController.m */,
+				BF744E0C154FA3B300B51FDB /* ViewController.xib */,
+				BF744DFE154FA3B300B51FDB /* Supporting Files */,
+			);
+			path = RomoTuts1;
+			sourceTree = "<group>";
+		};
+		BF744DFE154FA3B300B51FDB /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				BF744DFF154FA3B300B51FDB /* RomoTuts1-Info.plist */,
+				BF744E00154FA3B300B51FDB /* InfoPlist.strings */,
+				BF744E03154FA3B300B51FDB /* main.m */,
+				BF744E05154FA3B300B51FDB /* RomoTuts1-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF744E14154FA3DC00B51FDB /* RomoIOS */ = {
+			isa = PBXGroup;
+			children = (
+				BF744E15154FA3DC00B51FDB /* RomoMovement.h */,
+				BF744E16154FA3DC00B51FDB /* RomoMovement.m */,
+			);
+			name = RomoIOS;
+			path = "../../../../Projects/Romotive/Romo-SDK/iOS/RomoIOS";
+			sourceTree = "<group>";
+		};
+		BF744E17154FA3DC00B51FDB /* RomoLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				BF744E18154FA3DC00B51FDB /* AudioInterface.cpp */,
+				BF744E19154FA3DC00B51FDB /* AudioInterface.h */,
+				BF744E1A154FA3DC00B51FDB /* AudioInterfaceOpenAL.cpp */,
+				BF744E1B154FA3DC00B51FDB /* AudioInterfaceOpenAL.h */,
+				BF744E1C154FA3DC00B51FDB /* AudioManager.cpp */,
+				BF744E1D154FA3DC00B51FDB /* AudioManager.h */,
+				BF744E1E154FA3DC00B51FDB /* AudioThread.cpp */,
+				BF744E1F154FA3DC00B51FDB /* AudioThread.h */,
+				BF744E20154FA3DC00B51FDB /* NativeInterface.h */,
+				BF744E21154FA3DC00B51FDB /* NativeManager.h */,
+				BF744E22154FA3DC00B51FDB /* NativeManager.mm */,
+				BF744E23154FA3DC00B51FDB /* ResourceManager.cpp */,
+				BF744E24154FA3DC00B51FDB /* ResourceManager.h */,
+				BF744E25154FA3DC00B51FDB /* RomoInclude.h */,
+				BF744E26154FA3DC00B51FDB /* Thread.cpp */,
+				BF744E27154FA3DC00B51FDB /* Thread.h */,
+				BF744E28154FA3DC00B51FDB /* WavFile.cpp */,
+				BF744E29154FA3DC00B51FDB /* WavFile.h */,
+			);
+			name = RomoLibrary;
+			path = "../../../../Projects/Romotive/Romo-SDK/iOS/RomoLibrary";
+			sourceTree = "<group>";
+		};
+		BF744E33154FA40500B51FDB /* RomoFaces */ = {
+			isa = PBXGroup;
+			children = (
+				BF744E34154FA40500B51FDB /* romo-normal.png */,
+			);
+			name = RomoFaces;
+			path = "../../../../Projects/Romotive/Romo-SDK/iOS/RomoFaces";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BF744DF2154FA3B300B51FDB /* RomoTuts1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF744E11154FA3B300B51FDB /* Build configuration list for PBXNativeTarget "RomoTuts1" */;
+			buildPhases = (
+				BF744DEF154FA3B300B51FDB /* Sources */,
+				BF744DF0154FA3B300B51FDB /* Frameworks */,
+				BF744DF1154FA3B300B51FDB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RomoTuts1;
+			productName = RomoTuts1;
+			productReference = BF744DF3154FA3B300B51FDB /* RomoTuts1.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF744DEA154FA3B300B51FDB /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = BF744DED154FA3B300B51FDB /* Build configuration list for PBXProject "RomoTuts1" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = BF744DE8154FA3B300B51FDB;
+			productRefGroup = BF744DF4154FA3B300B51FDB /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF744DF2154FA3B300B51FDB /* RomoTuts1 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BF744DF1154FA3B300B51FDB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF744E02154FA3B300B51FDB /* InfoPlist.strings in Resources */,
+				BF744E0E154FA3B300B51FDB /* ViewController.xib in Resources */,
+				BF744E35154FA40500B51FDB /* romo-normal.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF744DEF154FA3B300B51FDB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BF744E04154FA3B300B51FDB /* main.m in Sources */,
+				BF744E08154FA3B300B51FDB /* AppDelegate.m in Sources */,
+				BF744E0B154FA3B300B51FDB /* ViewController.m in Sources */,
+				BF744E2A154FA3DC00B51FDB /* RomoMovement.m in Sources */,
+				BF744E2B154FA3DC00B51FDB /* AudioInterface.cpp in Sources */,
+				BF744E2C154FA3DC00B51FDB /* AudioInterfaceOpenAL.cpp in Sources */,
+				BF744E2D154FA3DC00B51FDB /* AudioManager.cpp in Sources */,
+				BF744E2E154FA3DC00B51FDB /* AudioThread.cpp in Sources */,
+				BF744E2F154FA3DC00B51FDB /* NativeManager.mm in Sources */,
+				BF744E30154FA3DC00B51FDB /* ResourceManager.cpp in Sources */,
+				BF744E31154FA3DC00B51FDB /* Thread.cpp in Sources */,
+				BF744E32154FA3DC00B51FDB /* WavFile.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BF744E00154FA3B300B51FDB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF744E01154FA3B300B51FDB /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		BF744E0C154FA3B300B51FDB /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF744E0D154FA3B300B51FDB /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BF744E0F154FA3B300B51FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		BF744E10154FA3B300B51FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BF744E12154FA3B300B51FDB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RomoTuts1/RomoTuts1-Prefix.pch";
+				INFOPLIST_FILE = "RomoTuts1/RomoTuts1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		BF744E13154FA3B300B51FDB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "RomoTuts1/RomoTuts1-Prefix.pch";
+				INFOPLIST_FILE = "RomoTuts1/RomoTuts1-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF744DED154FA3B300B51FDB /* Build configuration list for PBXProject "RomoTuts1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF744E0F154FA3B300B51FDB /* Debug */,
+				BF744E10154FA3B300B51FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF744E11154FA3B300B51FDB /* Build configuration list for PBXNativeTarget "RomoTuts1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF744E12154FA3B300B51FDB /* Debug */,
+				BF744E13154FA3B300B51FDB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF744DEA154FA3B300B51FDB /* Project object */;
+}
