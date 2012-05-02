@@ -46,7 +46,7 @@
 - (BOOL)isPluggedIn;
 
 /****************************************
- Check to see if Romo is plugged in
+ Override headphones
  ****************************************/
 
 - (void)overrideToHeadphones:(BOOL)useHeadPhones;

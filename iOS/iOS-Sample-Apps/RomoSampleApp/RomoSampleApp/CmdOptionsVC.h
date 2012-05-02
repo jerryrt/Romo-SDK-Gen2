@@ -10,13 +10,15 @@
 #import <UIKit/UIKit.h>
 
 @protocol CmdOptionsDelegate
-- (void)didSaveWithOptions:(NSDictionary *)options;
+- (void)didSaveWithOptions:(NSDictionary *)options forIndex:(NSInteger)index;
 @end
 
 @interface CmdOptionsVC : UIViewController
 {
     id<CmdOptionsDelegate> delegate;
+    
 }
+
 
 @property (nonatomic, retain) id<CmdOptionsDelegate> delegate;
 @property (nonatomic, retain) IBOutlet UISlider *durationSlider;
@@ -36,5 +38,8 @@
 
 - (IBAction)btnSaveTap:(id)sender;
 - (IBAction)btnCancelTap:(id)sender;
+
+- (void)loadExistingOptions:(NSDictionary *)options atIndex:(NSInteger)index;
+- (void)loadNewOptions;
 
 @end
