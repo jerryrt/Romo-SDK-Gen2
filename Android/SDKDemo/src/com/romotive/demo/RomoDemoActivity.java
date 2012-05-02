@@ -3,6 +3,7 @@ package com.romotive.demo;
 import com.romotive.library.RomoCommandInterface;
 
 import android.app.Activity;
+import android.media.AudioManager;
 import android.os.Bundle;
 import android.view.View;
 
@@ -32,6 +33,8 @@ public class RomoDemoActivity extends Activity
         
         // Initialize your RomoCommandInterface:
         mCommandInterface = new RomoCommandInterface();
+        AudioManager manager = (AudioManager) getSystemService(AUDIO_SERVICE);
+        manager.setStreamVolume(AudioManager.STREAM_MUSIC, manager.getStreamMaxVolume(AudioManager.STREAM_MUSIC), 0);
     }
 
     @Override
