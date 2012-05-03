@@ -38,18 +38,28 @@ public:
     void playAuxCommand(uint8_t auxValue);
     
 private:
+    pthread_mutex_t mDirtyMutex;
+    pthread_cond_t mDirtyCond;
+    
     pthread_mutex_t mEffectMutex;
     pthread_mutex_t mMotorMutex;
     pthread_mutex_t mAuxMutex;
+    
+    bool mDirty;
     
     bool mEffectDirty;
     bool mMotorDirty;
     bool mAuxDirty;
     
     std::string mEffectFilename;
+    uint32_t mEffectId;
+    
     MotorCommand mMotorCommand;
     AuxCommand mAuxCommand;
+    
     AudioInterface *mAudioInterface;
+    
+
     
 };
 

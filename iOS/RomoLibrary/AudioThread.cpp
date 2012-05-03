@@ -21,6 +21,11 @@
 
 AudioThread::AudioThread()
 {
+    pthread_mutex_init(&mDirtyMutex, NULL);
+    pthread_cond_init(&mDirtyCond, NULL);
+    
+    mDirty = FALSE;
+    
     pthread_mutex_init(&mEffectMutex, NULL);
     pthread_mutex_init(&mMotorMutex, NULL);
     pthread_mutex_init(&mAuxMutex, NULL);
@@ -28,17 +33,20 @@ AudioThread::AudioThread()
     mEffectDirty = FALSE;
     mEffectFilename = std::string();
     
+    mEffectId = 0;
+    
     mMotorDirty = FALSE;
     mMotorCommand = MotorCommand();
     
     mAuxDirty = FALSE;
     mAuxCommand = AuxCommand();
-    
-    mAudioInterface = AudioInterface::create();
 }
 
 AudioThread::~AudioThread()
 {
+    pthread_mutex_destroy(&mDirtyMutex);
+    pthread_cond_destroy(&mDirtyCond);
+    
     pthread_mutex_destroy(&mEffectMutex);
     pthread_mutex_destroy(&mMotorMutex);
     pthread_mutex_destroy(&mAuxMutex);
@@ -52,30 +60,46 @@ AudioThread::~AudioThread()
 
 void AudioThread::run()
 {
+    mAudioInterface = AudioInterface::create();
+    
+    
     while (mState == THREAD_RUNNING)
     {
-        if (mEffectDirty)
-        {
-            pthread_mutex_lock(&mEffectMutex);
-            mEffectDirty = !(mAudioInterface->playSoundFile(mEffectFilename));
-            pthread_mutex_unlock(&mEffectMutex);
-        }
-        
-        if (mMotorDirty)
-        {
-            pthread_mutex_lock(&mMotorMutex);
-            mMotorDirty = !(mAudioInterface->playMotorCommand(mMotorCommand));
-            pthread_mutex_unlock(&mMotorMutex);
-        }
-        
-        if (mAuxDirty)
-        {
-            pthread_mutex_lock(&mAuxMutex);
-            mAuxDirty = !(mAudioInterface->playAuxCommand(mAuxCommand));
-            pthread_mutex_unlock(&mAuxMutex);
-        }
+        pthread_mutex_lock(&mDirtyMutex);
+        while (!mDirty)
+            pthread_cond_wait(&mDirtyCond, &mDirtyMutex);
+        pthread_mutex_unlock(&mDirtyMutex);
         
         mAudioInterface->reclaimBuffers();
+        
+        pthread_mutex_lock(&mEffectMutex);
+        if (mEffectDirty)
+        {
+            if (mEffectId) {
+                mEffectId = 0;
+            } else {
+                mEffectDirty = !(mAudioInterface->playSoundFile(mEffectFilename));
+            }
+        }
+        pthread_mutex_unlock(&mEffectMutex);
+        
+        pthread_mutex_lock(&mMotorMutex);
+        if (mMotorDirty)
+        {
+            mMotorDirty = !(mAudioInterface->playMotorCommand(mMotorCommand));
+        }
+        pthread_mutex_unlock(&mMotorMutex);
+        
+        pthread_mutex_lock(&mAuxMutex);
+        if (mAuxDirty)
+        {
+            mAuxDirty = !(mAudioInterface->playAuxCommand(mAuxCommand));
+        }
+        pthread_mutex_unlock(&mAuxMutex);
+        
+        pthread_mutex_lock(&mDirtyMutex);
+        mDirty = mEffectDirty || mMotorDirty || mAuxDirty;
+        pthread_mutex_unlock(&mDirtyMutex);
     }
 }
 
@@ -89,6 +113,11 @@ void AudioThread::playSoundFile(std::string filename)
     mEffectDirty = TRUE;
     
     pthread_mutex_unlock(&mEffectMutex);
+    
+    pthread_mutex_lock(&mDirtyMutex);
+    mDirty = TRUE;
+    pthread_mutex_unlock(&mDirtyMutex);
+    pthread_cond_signal(&mDirtyCond);
 }
 
 void AudioThread::playMotorCommand(uint8_t leftValue, uint8_t rightValue)
@@ -105,6 +134,11 @@ void AudioThread::playMotorCommand(uint8_t leftValue, uint8_t rightValue)
     mMotorDirty = TRUE;
     
     pthread_mutex_unlock(&mMotorMutex);
+    
+    pthread_mutex_lock(&mDirtyMutex);
+    mDirty = TRUE;   
+    pthread_mutex_unlock(&mDirtyMutex);
+    pthread_cond_signal(&mDirtyCond);
 }
 
 void AudioThread::playAuxCommand(uint8_t auxValue)
@@ -115,4 +149,8 @@ void AudioThread::playAuxCommand(uint8_t auxValue)
     mAuxDirty = TRUE;
     
     pthread_mutex_unlock(&mAuxMutex);
+    pthread_mutex_lock(&mDirtyMutex);
+    mDirty = TRUE;
+    pthread_mutex_unlock(&mDirtyMutex);
+    pthread_cond_signal(&mDirtyCond);
 }
