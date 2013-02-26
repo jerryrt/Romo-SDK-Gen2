@@ -2,7 +2,7 @@
 - - -
 by Romotive, Inc.
 
-**This SDK is for the Romo 2. A new SDK for the Romo 3 (First devivered January 2013) will be available here before 4/1/13**
+**This SDK is for the Romo 2. A new SDK for the Romo 3 (First delivered January 2013) will be available soon!**
 
 A collection of classes for moving and controlling Romo, the Smart Phone Robot. 
 
