@@ -2,11 +2,13 @@
 - - -
 by Romotive, Inc.
 
+**This SDK is for the Romo 2. A new SDK for the Romo 3 (First devivered January 2013) will be available here before 4/1/13**
+
 A collection of classes for moving and controlling Romo, the Smart Phone Robot. 
 
 Please visit http://romotive.com/store to get your own smart phone robot.
 
-![Romo Image](http://romotive.com/images/220/romo-white-neon-whitebg-sq.jpg)
+![Romo Image](https://s3.amazonaws.com/romotive.com/img/old-romo/old-romo-lime-green.jpg)
 
 With the Romo library, you can:
 
